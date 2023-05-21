@@ -84,6 +84,7 @@ router.get('/api/items/:id', async (ctx, next) => {
 });
 
 router.post('/api/order', async (ctx, next) => {
+    ctx.header="Access-Control-Allow-Origin", "http://localhost:3000";
     const { owner: { phone, address }, items } = ctx.request.body;
     if (typeof phone !== 'string') {
         return fortune(ctx, 'Bad Request: Phone', 400);
@@ -106,9 +107,9 @@ router.post('/api/order', async (ctx, next) => {
         }
         return true;
     })) {
-        return fortune(ctx, 'Bad Request', 400);
+        return fortune(ctx, 'Bad Request: Id, Count, Price', 400);
     }
-
+   
     return fortune(ctx, null, 204);
 });
 
